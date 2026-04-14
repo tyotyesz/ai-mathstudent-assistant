@@ -1,0 +1,38 @@
+flowchart TD
+  S01["▶ 🔒 S01 - Bejelentkezés"]
+  S02["🔒 S02 - Regisztráció"]
+  S03["S03 - Főoldal (Tutor chat)"]
+  S04["S04 - Profil"]
+  S05["S05 - Előzmény részletek"]
+  S06["♦ S06 - Jelszó módosítása"]
+  S07["♦ S07 - Fióktörlés megerősítése"]
+
+  S01 -->|Regisztráció link| S02
+  S02 -->|Sikeres regisztráció| S01
+  S01 -->|Bejelentkezés sikeres| S03
+
+  S03 -->|Profil megnyitása| S04
+  S04 -->|Kezdőlap / Home| S03
+
+  S04 -->|Mentett chat megnyitása| S05
+  S05 -->|Új chat indítása| S03
+
+  S04 -->|Jelszó módosítása gomb| S06
+  S06 -->|Mentés sikeres| S04
+  S06 -->|Mégse| S04
+
+  S04 -->|Fiók törlése gomb| S07
+  S07 -->|Megerősítés és törlés| S02
+  S07 -->|Mégse| S04
+
+  S03 -->|Kijelentkezés| S01
+  S04 -->|Kijelentkezés| S01
+  S05 -->|Kijelentkezés| S01
+
+  S03 -->|Védett oldal token nélkül -> átirányítás| S01
+  S04 -->|Védett oldal token nélkül -> átirányítás| S01
+  S05 -->|Védett oldal token nélkül -> átirányítás| S01
+
+  S03 -->|Session lejárt / auth hiba| S01
+  S04 -->|Session lejárt / auth hiba| S01
+  S05 -->|Session lejárt / auth hiba| S01
