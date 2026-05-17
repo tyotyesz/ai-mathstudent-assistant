@@ -1,48 +1,39 @@
-# User journey-k
 
-## 1. Gyors hozzáférés a tutorhoz
-Persona: Egy egyetemista hallgató, aki már rendelkezik fiókkal, és minél gyorsabban el akar jutni a matematikai chat munkaterületre.
+# User Journeys
 
-Belépési pont: App indulás nyilvános állapotban, bejelentkezési oldal.
+## 1. Fast access to the tutor workspace
+Persona: a student who already has an account and wants to start tutoring quickly.
 
-Lépések:
-1. S01 - Bejelentkezés: a felhasználó megadja az email és jelszó mezőket, majd rákattint a Login gombra; a rendszer siker esetén tokent ment és a főoldalra irányít; hibaág: hibás adatok esetén Invalid credentials üzenet jelenik meg.
-2. S03 - Főoldal: a felhasználó a betöltött chat felületet, mappalistát és mentett chat listát látja; a rendszer lekéri a mappákat és a chateket; hibaág: ha token hiányzik vagy auth hiba van, átirányítás történik S01-re.
-3. S03 - Főoldal: a felhasználó ellenőrzi, hogy elérhető-e az Új chat indítása és a chatküldés; a rendszer interaktív tutor panelt mutat; hibaág: ideiglenes backend probléma esetén toast hibaüzenet jelenik meg.
+Entry point: Login page.
 
-Sikerkritérium: A felhasználó hitelesítve eljut az S03 képernyőre, és aktívan tud új chatet indítani vagy meglévő chatet megnyitni.
+Steps:
+1) Login (S01): user enters email and password, submits, and receives a token.
+2) Home (S03): app loads folders and chats; user sees the chat workspace.
+3) User starts a new chat and sends a math request.
 
-Mért időtartam (kb.): 20-40 mp, 3-5 kattintás.
+Success criteria: user reaches the Home workspace and successfully sends the first message.
 
-## 2. Új matematikai chat indítása és folytatása
-Persona: Egy gyakorló diák, aki új feladatot kér, majd ugyanabban a beszélgetésben követő kérdésekkel halad tovább.
+## 2. Start a new math chat and continue
+Persona: a student who wants a new exercise and then follow-up hints.
 
-Belépési pont: Hitelesített állapotban S03 - Főoldal.
+Entry point: Home (S03).
 
-Lépések:
-1. S03 - Főoldal: a felhasználó az Új chat gombra kattint, majd beír egy matematikai kérést és elküldi; a rendszer a chats/start végponton létrehozza a beszélgetést és visszaadja az első tutor választ; hibaág: üres üzenetnél nincs beküldés, szolgáltatáshiba esetén hiba toast jelenik meg.
-2. S03 - Főoldal: a felhasználó a létrejött chatet a jobb oldali panelen látja, és újabb üzenetet küld; a rendszer a chats/{chat_id}/messages végponton folytatja a beszélgetést és frissíti az üzenetlistát; hibaág: API hiba esetén a válasz nem frissül, hiba toast jelenik meg.
-3. S03 - Főoldal: a felhasználó opcionálisan mappát hoz létre, majd a chatet mappához rendeli; a rendszer létrehozza a mappát és patch művelettel áthelyezi a chatet; hibaág: létrehozási vagy mozgatási hiba esetén sikertelen művelet toast jelenik meg.
-4. S03 - Főoldal: a felhasználó később kiválasztja a mentett chatet a listából és folytatja; a rendszer betölti a teljes chat részleteit és üzeneteit; hibaág: nem létező vagy nem elérhető chat esetén chat betöltési hibaüzenet jelenik meg.
+Steps:
+1) Start a chat with POST /api/qa/chats/start.
+2) Receive the first assistant reply and see it in the chat panel.
+3) Send follow-up messages via POST /api/qa/chats/{chat_id}/messages.
+4) Optionally create a folder and move the chat into it.
 
-Sikerkritérium: A felhasználó legalább egy új beszélgetést létrehoz, tutor választ kap, majd ugyanazt a chatet később is meg tudja nyitni és folytatni.
+Success criteria: at least one chat is created, stored, and reopened later.
 
-Mért időtartam (kb.): 60-150 mp, 6-12 kattintás.
+## 3. Profile management (password change or account deletion)
+Persona: a security-conscious user managing account settings.
 
-## 3. Fiókkezelés a profilban (jelszócsere vagy törlés)
-Persona: Egy biztonságtudatos felhasználó, aki karbantartja a fiókját, jelszót cserél vagy megszünteti a hozzáférését.
+Entry point: Profile (S04).
 
-Belépési pont: Hitelesített navigációból S04 - Profil.
+Steps:
+1) Open profile and load email + saved chats.
+2) Open the Change Password modal and submit new credentials.
+3) Optionally delete the account and confirm the browser prompt.
 
-Lépések:
-1. S03 - Főoldal: a felhasználó a felső navigációban a Profile linkre kattint; a rendszer profil oldalra vált és lekéri az emailt, valamint a mentett chat listát; hibaág: token hiány vagy auth hiba esetén átirányítás S01-re.
-2. S04 - Profil: a felhasználó a Change password gombra kattint; a rendszer megnyitja a modális jelszócsere ablakot; hibaág: ha a profiladatok nem tölthetők, az oldal visszairányíthat S01-re.
-3. S06 - Jelszó módosítása: a felhasználó megadja a régi és új jelszót, majd Save; a rendszer validál és siker esetén bezárja a modalt; hibaág: üres mezők, azonos régi-új jelszó, hibás régi jelszó vagy backend hiba esetén hiba toast jelenik meg.
-4. S04 - Profil: alternatív ágban a felhasználó a Delete account gombra kattint és megerősíti a törlést; a rendszer törli a fiókot, törli a tokent és a regisztrációs oldalra irányít; hibaág: sikertelen törlés esetén a felhasználó a profilon marad hiba toasttal.
-5. S04 vagy S03 - Kijelentkezés: a felhasználó Logout gombra kattint; a rendszer törli a tokent és S01-re navigál; hibaág: nincs külön hibaág, kliens oldali token törlés történik.
-
-Sikerkritérium: A felhasználó sikeresen jelszót módosít, vagy sikeresen törli a fiókját, illetve bármikor biztonságosan ki tud jelentkezni.
-
-Mért időtartam (kb.):
-- Jelszócsere ág: 30-70 mp, 4-7 kattintás.
-- Fióktörlés ág: 20-45 mp, 3-5 kattintás.
+Success criteria: password change succeeds or account deletion completes and logs the user out.

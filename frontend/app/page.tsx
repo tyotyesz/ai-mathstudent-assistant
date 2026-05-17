@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { api } from "../lib/api";
 import { getToken } from "../lib/auth";
+import MarkdownMath from "../components/MarkdownMath";
 
 type Folder = {
   id: string;
@@ -302,7 +303,7 @@ export default function HomePage() {
               key={msg.id}
               className={`max-w-[90%] rounded p-3 ${msg.role === "user" ? "ml-auto bg-indigo-100" : "mr-auto bg-white border border-slate-200"}`}
             >
-              <p className="text-sm text-slate-700 whitespace-pre-wrap">{msg.content}</p>
+              <MarkdownMath content={msg.content} className="text-sm text-slate-700 whitespace-pre-wrap" />
               {msg.role === "assistant" && (
                 <div className="mt-2 flex items-center justify-between gap-2 text-xs text-slate-500">
                   <span>{categoryLabel(msg.category)}</span>

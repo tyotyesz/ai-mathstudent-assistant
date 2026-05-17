@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { api } from "../../../lib/api";
 import { getToken } from "../../../lib/auth";
+import MarkdownMath from "../../../components/MarkdownMath";
 
 type ChatMessage = {
   id: string;
@@ -60,7 +61,9 @@ export default function HistoryDetailPage() {
         {data.messages.map((msg) => (
           <div key={msg.id} className={`p-3 rounded ${msg.role === "user" ? "bg-indigo-100" : "bg-slate-50 border border-slate-200"}`}>
             <p className="text-xs font-semibold uppercase text-slate-500">{msg.role}</p>
-            <p className="text-sm text-slate-700 mt-1 whitespace-pre-wrap">{msg.content}</p>
+            <div className="mt-1">
+              <MarkdownMath content={msg.content} className="text-sm text-slate-700 whitespace-pre-wrap" />
+            </div>
           </div>
         ))}
       </div>

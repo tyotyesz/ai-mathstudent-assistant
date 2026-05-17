@@ -1,40 +1,35 @@
-# User Stories Sprint 2
+# User Stories Sprint 2 (Updated for Chat-Based Tutor)
 
 ## US-01 Empty state
-- As a student, when I have no history, I see an empty-state message with a CTA "Ask a question" to start my first conversation.
+- As a student, when I have no chats, I see a clear empty prompt that tells me to start a new math session.
 - AC:
-  - Empty history list shows headline + description + CTA linking to ask form.
-  - Appears on Home when no saved conversations.
-  - Disappears once at least one item exists.
-  - Suggested tests: load Home with no history -> empty panel visible; after first ask -> list populated.
+  - Home shows a prompt when no chat is selected.
+  - Profile shows "No chats saved yet" when the list is empty.
+  - State clears once at least one chat exists.
 
-## US-02 Submit valid question
-- As a student, I want validation preventing empty/whitespace or overly long questions so I submit meaningful queries.
+## US-02 Submit valid message
+- As a student, I want validation preventing empty messages so I submit meaningful queries.
 - AC:
-  - Reject empty or whitespace-only input with inline error.
-  - Reject >300 chars with inline error.
-  - Submit button disabled while loading.
-  - Suggested tests: submit whitespace -> error; submit 301 chars -> error; valid 20-char -> accepted.
+  - Empty or whitespace-only messages are not submitted.
+  - Submit button shows loading state while sending.
+  - Backend enforces message length (max 600 chars).
 
-## US-03 Get answer + steps
-- As a student, I want to see an answer with short steps after loading.
+## US-03 Receive tutor guidance
+- As a student, I want concise tutor hints instead of a full solution.
 - AC:
-  - Loading indicator visible during request.
-  - Response shows answer block and 2-5 bullet steps.
-  - Toast indicates saved to history.
-  - Suggested tests: valid ask -> loading -> answer + steps; history list updates.
+  - Assistant replies with the next step or hint.
+  - Non-math inputs are refused with a math-only message.
+  - Assistant labels indicate task generation, problem solving, follow-up, or refusal.
 
-## US-04 View history and details
-- As a student, I can browse past conversations and open details.
+## US-04 View chat history and details
+- As a student, I can browse saved chats and open the full transcript.
 - AC:
-  - History sidebar shows latest first; filter/search by substring.
-  - Clicking item opens /history/{id} showing Q, answer, steps, created_at.
-  - "Start new chat" link goes to Home.
-  - Suggested tests: create two asks -> history count 2; open first -> detail visible.
+  - Sidebar lists chats in most-recent order.
+  - Selecting a chat loads messages.
+  - History detail page shows a read-only transcript.
 
-## US-05 Error + Retry
-- As a student, when the service is unavailable or times out, I see an error panel with guidance and can retry.
+## US-05 Error handling
+- As a student, when the service is unavailable, I see a clear error message and can retry manually.
 - AC:
-  - Backend 5xx/timeout shows error panel with message and prominent Retry button.
-  - Retry resends last question; on success, error clears and answer shows.
-  - Suggested tests: mock 500 -> error panel; click Retry -> success -> panel hidden.
+  - Failed requests show an error toast.
+  - Re-sending the message succeeds once the backend is available.

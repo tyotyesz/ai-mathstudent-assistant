@@ -1,20 +1,17 @@
-# Önértékelés
+# Self-Assessment
 
-Az alábbi pontozás a webalkalmazás jelenleg implementált állapota alapján készült.
+The following scores are based on the current implementation state of the web application.
 
-| Szempont | Pontszám | Indoklás |
+| Criterion | Score | Rationale |
 | --- | --- | --- |
-| Vizuális konzisztencia (szín, tipográfia, spacing) | 4 | A Tailwind-alapú slate-indigo-rose paletta, a hasonló kártya- és űrlapminták, valamint az egységes térközök összességében letisztult és konzisztens megjelenést adnak. |
-| Információs hierarchia és olvashatóság | 4 | A címek, alcímek, listaelemek és cselekvésgombok jól elkülönülnek, ezért a fő feladatok gyorsan azonosíthatók. |
-| Visszajelzések (loading, validáció, hiba, siker) | 4 | Az űrlapok és műveletek több ponton adnak loading, hiba és siker visszajelzést (inline hiba + toast), de ez nem teljesen egységes minden képernyőn. |
-| Hibakezelés és üres állapotok | 4 | A chat, profil és előzmények nézeteiben megjelennek üres állapotok és hibavisszajelzések, továbbá auth-hibánál megtörténik az átirányítás a bejelentkezésre. |
-| Mobil / asztal lefedettség | 3 | A layout mobilról asztalra rugalmasan vált (pl. egyoszloposból kétoszlopos nézetbe), de a reszponzív finomhangolás főleg egyetlen breakpoint köré épül. |
-| Akadálymentesség (a11y) | 2 | Vannak alap címkézett mezők és szemantikusan jó elemek, de nincs látható fókuszkezelés-audit, ARIA-stratégia vagy billentyűzetes modal-fókuszcsapda megoldás. |
-| Onboarding és új-user élmény | 3 | A regisztráció és bejelentkezés egyenes útvonalat ad, viszont dedikált bevezető, lépésenkénti útmutatás vagy első használatos onboarding nincs. |
-| Teljesítményérzet (gyorsaság, animációk) | 3 | A felület egyszerű és várhatóan gyors, de minimális animációt használ, ezért az interakciók vizuális dinamizmusa és perceived performance érzete közepes. |
+| Visual consistency (color, typography, spacing) | 4 | The Tailwind-based slate/indigo/rose palette, consistent card and form patterns, and spacing give a clean, coherent UI. |
+| Information hierarchy and readability | 4 | Headings, subheadings, and CTAs are distinct, making primary tasks easy to identify. |
+| Feedback (loading, validation, error, success) | 4 | Forms and actions provide loading, error, and success feedback, though not perfectly consistent on every screen. |
+| Error handling and empty states | 4 | Chat, profile, and history views show empty states and error messages; auth errors redirect to login. |
+| Mobile/desktop coverage | 3 | Layout adapts from single to two columns, but responsive tuning focuses on a limited set of breakpoints. |
+| Accessibility (a11y) | 2 | Basic labels and semantic elements exist, but focus management and ARIA audits are not complete. |
+| Onboarding and new-user experience | 3 | Registration and login are straightforward, but there is no dedicated onboarding flow. |
+| Perceived performance and motion | 3 | The UI is simple and likely fast, but uses minimal motion or animation. |
 
-## Szabadszöveges értékelés
-Büszke vagyok arra, hogy sikerült egy konzisztens és tiszta felületet kialakítanom a webalkalmazáshoz. 
-Ha lenne még két hetem, több olyan kiegészítő funkciót is beépítenék, amelyeket már korábban is terveztem. 
-Amit sajnálok, hogy nem tudtam megvalósítani, az a részleges tanítás magyar nyelvű példákkal. 
-Erre nem találtam valóban jó technikai megoldást, ezért végül az integrált AI megközelítésnél maradtam.
+## Free-Text Reflection
+I am proud of the clean and consistent UI achieved for the web application. With two more weeks, I would add additional planned features and refine accessibility behaviors. I also wanted partial tutoring with Hungarian examples, but did not find a suitable technical approach, so the integrated AI flow remained English-only.
