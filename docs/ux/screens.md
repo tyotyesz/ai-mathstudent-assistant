@@ -21,7 +21,3 @@
 | Main Chat Workspace | docs/ux/screenshots/S03_fooldal.png | Filename retains the original Hungarian label. |
 | Profile | docs/ux/screenshots/S04_profil.png | Filename retains the original Hungarian label. |
 | Change Password Modal | docs/ux/screenshots/S05_jelszomodositas.png | Filename retains the original Hungarian label. |
-
-TODO:
-- Insert screenshot of History Detail (/history/[id]).
-- Insert screenshot of Account Deletion confirmation.

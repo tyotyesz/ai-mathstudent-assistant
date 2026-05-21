@@ -3,7 +3,7 @@
 Prototype web application for math tutoring using a Qwen-based assistant. The app stores chat sessions per user, supports follow-up tutoring, and organizes saved chats into folders.
 
 ## Features
-- Qwen-based math tutor with task generation, problem-solving hints, follow-up guidance, and non-math refusal behavior.
+- Qwen-based math tutor with task generation, problem-solving hints, follow-up guidance, and non-math refusal behavior. Task generation returns one math problem without solution steps.
 - Auth with JWT, profile view, password change modal, and account deletion.
 - Chat history with completion status and folder organization.
 - KaTeX math rendering on the frontend.
@@ -79,10 +79,11 @@ GPU note: docker-compose.yml includes a GPU reservation block (for NVIDIA). If y
 ## Demo Usage Flow
 1) Register at /register and log in at /login.
 2) On the home screen, start a new chat and ask a math question.
-3) Continue with follow-up messages; the tutor returns only the next hint or step.
-4) Try a non-math question (example: "Write me a poem") to see refusal behavior.
-5) Create folders, move chats, and delete chats or folders (deleting a folder also deletes its chats).
-6) Visit /profile to change password or delete the account.
+3) Ask for a new task, for example: "Generate an easy linear equation." The tutor should return one problem statement without the solution.
+4) Continue with follow-up messages; the tutor returns only the next hint or step.
+5) Try a non-math question (example: "Write me a poem") to see refusal behavior.
+6) Create folders, move chats, and delete chats or folders (deleting a folder also deletes its chats).
+7) Visit /profile to change password or delete the account.
 
 ## Known Limitations
 - AI responses can be incorrect; results require verification.

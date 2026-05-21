@@ -21,6 +21,8 @@ The system prompt enforces:
 - Tutor-style guidance (next step or hint only).
 - Task generation behavior (exactly one problem, no solution).
 - JSON output preference with a fixed schema.
+- Task generation returns one student-facing math problem only, without solution steps or meta-level explanation.
+- Task generation replies are post-processed to remove model commentary when necessary.
 
 ## Expected JSON Response Format
 ```
@@ -36,8 +38,9 @@ If JSON is not returned, the system attempts to recover a reply from raw text.
 
 ### Task Generation
 - Triggered when the user asks to generate a new problem.
-- Output should be a single math problem statement only.
-- No solution steps or multiple problems.
+- Output should be a single student-facing math problem statement only.
+- No solution steps, no multiple problems, and no meta-level explanation.
+- If the model starts generating commentary instead of a direct problem, task-generation post-processing attempts to clean the reply or fall back to a predefined problem template.
 
 ### Problem Solving
 - Triggered for direct solve requests.
@@ -70,7 +73,7 @@ If JSON is not returned, the system attempts to recover a reply from raw text.
 
 ### Task generation
 User: "Generate a quadratic equation problem."
-Expected: single problem statement, no solution.
+Expected: a single student-facing problem statement, no solution and no explanation of what the model will create.
 
 ### Problem solving
 User: "Solve x^2 - 5x + 6 = 0."

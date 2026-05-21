@@ -1,0 +1,23 @@
+flowchart TD
+    User[User] --> UI[Next.js frontend]
+
+    UI <-->|REST API / JSON + JWT| API[FastAPI backend]
+
+    API --> DB[(PostgreSQL database)]
+    API --> Tutor[Qwen tutor module]
+    Tutor --> HF[Hugging Face model files]
+
+    API -.-> Auth[Authentication and JWT handling]
+    API -.-> Chats[Chat and folder management]
+
+    classDef user fill:#f7f7f7,stroke:#333,stroke-width:1px;
+    classDef frontend fill:#eef5ff,stroke:#333,stroke-width:1px;
+    classDef backend fill:#eef9f0,stroke:#333,stroke-width:1px;
+    classDef data fill:#fff4e6,stroke:#333,stroke-width:1px;
+    classDef ai fill:#f5efff,stroke:#333,stroke-width:1px;
+
+    class User user;
+    class UI frontend;
+    class API,Auth,Chats backend;
+    class DB data;
+    class Tutor,HF ai;

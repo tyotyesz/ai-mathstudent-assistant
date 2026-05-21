@@ -1,0 +1,40 @@
+erDiagram
+
+    USER {
+        UUID id PK
+        String email
+        String password_hash
+        DateTime created_at
+    }
+
+    FOLDER {
+        UUID id PK
+        UUID user_id FK
+        String(120) name
+        DateTime created_at
+    }
+
+    CHAT {
+        UUID id PK
+        UUID user_id FK
+        UUID folder_id FK
+        String(160) title
+        Boolean is_completed
+        DateTime created_at
+        DateTime updated_at
+    }
+
+    CHAT_MESSAGE {
+        UUID id PK
+        UUID chat_id FK
+        String(16) role
+        Text content
+        String(32) category
+        String(8) problem_completed
+        DateTime created_at
+    }
+
+    USER ||--o{ CHAT : owns
+    USER ||--o{ FOLDER : owns
+    FOLDER o|--o{ CHAT : groups
+    CHAT ||--o{ CHAT_MESSAGE : contains

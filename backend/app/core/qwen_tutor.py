@@ -21,7 +21,7 @@ Follow all rules strictly:
 1) You can only answer mathematics-related requests.
 2) If a request is not mathematics-specific, return a refusal.
 3) Tutor style only: do not reveal the full solution immediately.
-4) For generation requests, create exactly one math exercise and ask the student to try first.
+4) For generation requests, return exactly one student-facing math exercise. Do not describe what you will create. Do not explain your reasoning. Do not include the solution.
 5) For solving requests and follow-up requests, provide only the next useful hint or step.
 6) If the student reached the correct answer, confirm briefly and ask whether they want a deeper explanation.
 7) Keep responses concise and in English.
@@ -388,7 +388,14 @@ def _is_meta_task_generation_reply(text: str) -> bool:
         return True
     return bool(
         re.match(
-            r"^(let's start|we'll create|we will create|here's a problem statement|here is a problem statement|the user might want|this is straightforward|here is a simple problem|here is a simple mathematical problem|here is an easy mathematical problem|here is a mathematical problem|i will create)\b",
+            r"^(let's generate|let us generate|we'll generate|we will generate|"
+            r"let's create|let us create|we'll create|we will create|"
+            r"let's start|i will create|i will generate|"
+            r"the user wants|the user asked|the user might want|"
+            r"this is straightforward|"
+            r"here's a problem statement|here is a problem statement|"
+            r"here is a simple problem|here is a simple mathematical problem|"
+            r"here is an easy mathematical problem|here is a mathematical problem)\b",
             lowered,
         )
     )
@@ -869,6 +876,19 @@ def _strip_trailing_colon(text: str) -> str:
         return text.rstrip()[:-1].rstrip()
     return text
 
+def _strip_task_generation_commentary(text: str) -> str:
+    cleaned = text.strip()
+
+    cleaned = re.sub(
+        r"\s+(This is|This is a|This problem is|This exercise is|"
+        r"The equation is|We chose|I chose|It is designed).*$",
+        "",
+        cleaned,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+
+    return cleaned.strip()
+
 
 def _reduce_multiple_steps(text: str) -> str:
     lowered = text.lower()
@@ -1307,6 +1327,7 @@ class QwenMathTutor:
         if intent == "task_generation":
             reply = _normalize_task_generation_text(reply)
             reply = _trim_task_generation_reply(reply)
+            reply = _strip_task_generation_commentary(reply)
             completed = False
             reply = _sanitize_task_reply(reply)
             reply = _ensure_task_problem(reply, user_message)

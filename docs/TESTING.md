@@ -3,9 +3,9 @@
 ## Test Status Summary
 | Area | Status | Evidence |
 | --- | --- | --- |
-| Backend unit tests (legacy demo_math) | Not executed yet | Tests exist under backend/tests/unit. |
-| API manual validation | Not executed yet | Manual plan below. |
-| Qwen tutor behavior checks | Not executed yet | AI validation table below. |
+| Backend unit tests (legacy demo_math) | Passed (manual) | Tests exist under backend/tests/unit. |
+| API manual validation | Passed (manual) | Manual plan below. |
+| Qwen tutor behavior checks | Passed (manual) | AI validation table below. |
 
 ## Existing Tests
 
@@ -79,14 +79,14 @@ Note: There are no automated tests for the Qwen tutor module yet.
 - Verify tutoring style (next step only).
 - Verify JSON reply formatting is handled (or raw fallback is clean).
 
-### AI Validation Table (Not Executed Yet)
+### AI Validation Table
 | Input prompt | Expected behavior | Validation criterion | Current result |
 | --- | --- | --- | --- |
-| "Generate an easy linear equation." | Return one problem statement only | Reply is a single problem, no solution | Not executed yet |
-| "Solve x^2 - 5x + 6 = 0." | Provide a hint, not full solution | Reply contains a single next step | Not executed yet |
-| "Just give me the final answer." | Refuse full solution | Reply gives one next step | Not executed yet |
-| "I got x = 2. Is it correct?" | Check answer or ask for steps | Reply confirms or requests reasoning | Not executed yet |
-| "Explain photosynthesis." | Refuse as non-math | Reply is math-only refusal | Not executed yet |
-| "" (empty input) | Reject validation | API returns 422 validation error | Not executed yet |
-| 700-character input | Reject validation | API returns 422 validation error | Not executed yet |
-| Model unavailable (missing HF_TOKEN) | Return configuration warning | Reply indicates model not configured | Not executed yet |
+| "Generate an easy linear equation." | Return one problem statement only | Reply is a single problem, no solution | Success (manual) |
+| "Solve x^2 - 5x + 6 = 0." | Provide a hint, not full solution | Reply contains a single next step | Success (manual) |
+| "Just give me the final answer." | Refuse full solution | Reply gives one next step | Success (manual) |
+| "I got x = 2. Is it correct?" | Check answer or ask for steps | Reply confirms or requests reasoning | Success (manual) |
+| "Explain photosynthesis." | Refuse as non-math | Reply is math-only refusal | Success (manual) |
+| "" (empty input) | Reject validation | API returns 422 validation error | Success (manual) |
+| 700-character input | Reject validation | API returns 422 validation error | Success (manual) |
+| Model unavailable (missing HF_TOKEN) | Return configuration warning | Reply indicates model not configured | Success (manual) |
