@@ -13,7 +13,7 @@ services:
   backend:
     build: ./backend
     env_file:
-      - ./backend/.env.example
+      - ./backend/.env
     depends_on:
       - db
     ports:

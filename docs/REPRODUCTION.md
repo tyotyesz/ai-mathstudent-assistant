@@ -21,15 +21,13 @@ cd ai-mathstudent-assistant
 
 ### Backend environment
 
-Docker Compose uses backend/.env.example by default. You can either edit backend/.env.example directly or create a local backend/.env and update docker-compose.yml to point env_file at backend/.env.
-
-If you want a local backend/.env file, create it from the example file:
+Docker Compose uses backend/.env by default. Create this file from the example file before starting the backend and database:
 
 ```bash
 cp backend/.env.example backend/.env
 ```
 
-Open the chosen env file and set the required values.
+Open backend/.env and set the required values.
 
 At minimum, configure:
 

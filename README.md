@@ -40,10 +40,10 @@ Backend (see backend/.env.example):
 Frontend (see frontend/.env.example):
 - NEXT_PUBLIC_API_BASE: backend base URL (default http://localhost:8000).
 
-Note: docker-compose.yml uses backend/.env.example by default. You can either edit backend/.env.example directly or create backend/.env and update docker-compose.yml to point env_file at backend/.env.
+Note: docker-compose.yml uses backend/.env by default. For local execution, copy backend/.env.example to backend/.env and place real secrets only in backend/.env. Do not commit real tokens or secrets. The .env.example file should contain placeholders only.
 
 ## Run with Docker Compose (DB + Backend)
-1) Update backend/.env.example with your HF token and desired settings.
+1) Copy backend/.env.example to backend/.env and update backend/.env with your HF token and desired settings.
 2) Start services:
    - docker-compose up --build
 3) Backend runs at http://localhost:8000 and Postgres at port 5432.
