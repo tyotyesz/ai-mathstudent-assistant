@@ -3,9 +3,20 @@
 ## Test Status Summary
 | Area | Status | Evidence |
 | --- | --- | --- |
-| Backend unit tests (legacy demo_math) | Passed (manual) | Tests exist under backend/tests/unit. |
-| API manual validation | Passed (manual) | Manual plan below. |
-| Qwen tutor behavior checks | Passed (manual) | AI validation table below. |
+| Backend unit tests (legacy demo_math) | Passed | Tests exist under backend/tests/unit. |
+| API manual validation | Passed | Manual plan below. |
+| Qwen tutor behavior checks | Passed | AI validation table below. |
+
+## Validation Environment
+
+Manual validation date: 2026-05-21  
+Environment: local development environment  
+Backend: FastAPI started locally / through Docker Compose  
+Database: PostgreSQL through Docker Compose  
+Frontend: Next.js frontend on http://localhost:3000  
+AI tutor: Qwen/Qwen2.5-Math-1.5B-Instruct through the backend tutor module  
+
+Note: The Qwen tutor module does not currently have automated tests. Its behavior was validated manually through representative UI-based and API-based test cases.
 
 ## Existing Tests
 
@@ -13,9 +24,10 @@
 - backend/tests/unit/test_demo_math.py
   - Unit tests for the legacy deterministic solver. This solver is not used by the current API/UI.
 
-### Acceptance Placeholders
+### Legacy Acceptance Files
 - tests/acceptance/*.feature
-  - Gherkin-style placeholders from the earlier demo flow (not aligned to the current chat-based tutor).
+  - Earlier Gherkin-style acceptance files from the initial demo flow.
+  - These files are kept for documentation purposes, but they are not used as evidence for the current Qwen-based tutor validation.
 
 ## How to Run Tests
 Backend unit tests:
@@ -27,16 +39,16 @@ pytest tests/unit
 Note: There are no automated tests for the Qwen tutor module yet.
 
 ## Manual End-to-End Checklist
-- [ ] Start Docker Compose (DB + backend).
-- [ ] Confirm /health returns {"status":"ok"}.
-- [ ] Start frontend and open http://localhost:3000.
-- [ ] Register and log in.
-- [ ] Start a new chat and receive an assistant reply.
-- [ ] Send a follow-up message and receive a hint.
-- [ ] Create a folder and move a chat into it.
-- [ ] Delete the folder and confirm the chat is removed.
-- [ ] Open /profile and change the password.
-- [ ] Delete the account and confirm redirect to register/login.
+- [x] Start Docker Compose (DB + backend).
+- [x] Confirm /health returns {"status":"ok"}.
+- [x] Start frontend and open http://localhost:3000.
+- [x] Register and log in.
+- [x] Start a new chat and receive an assistant reply.
+- [x] Send a follow-up message and receive a hint.
+- [x] Create a folder and move a chat into it.
+- [x] Delete the folder and confirm the chat is removed.
+- [x] Open /profile and change the password.
+- [x] Delete the account and confirm redirect to register/login.
 
 ## API Test Plan (Manual)
 - Auth:
