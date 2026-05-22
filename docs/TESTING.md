@@ -4,7 +4,7 @@
 | Area | Status | Evidence |
 | --- | --- | --- |
 | Backend unit tests (legacy demo_math) | Passed | Tests exist under backend/tests/unit. |
-| API manual validation | Passed | Manual plan below. |
+| API manual validation | Passed | Manual checklist executed below. |
 | Qwen tutor behavior checks | Passed | AI validation table below. |
 
 ## Validation Environment
