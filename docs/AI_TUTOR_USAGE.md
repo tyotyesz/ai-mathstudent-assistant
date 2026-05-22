@@ -40,9 +40,12 @@ Provide math-only tutoring that emphasizes the next hint or step rather than ful
 - Safer prompt parsing and stricter JSON validation.
 - Model selection and configuration in admin settings.
 
-## AI Evaluation Log (Placeholder)
+## AI Evaluation Log
+
 | Date | Evaluator | Prompt set | Summary | Result |
 | --- | --- | --- | --- | --- |
-| TBD | TBD | v1 starter set | Manual spot check | Not executed yet |
-| TBD | TBD | v1 refusal set | Non-math refusal check | Not executed yet |
-| TBD | TBD | v1 follow-up set | Follow-up hint check | Not executed yet |
+| 2026-05-21 | Developer | Task generation | Checked whether the tutor returns one student-facing math problem without solution steps. | Passed |
+| 2026-05-21 | Developer | Problem solving | Checked whether the tutor gives a next step or hint instead of a full solution. | Passed |
+| 2026-05-21 | Developer | Follow-up and answer check | Checked follow-up behavior and answer-verification style. | Passed |
+| 2026-05-21 | Developer | Non-math refusal | Checked whether non-math prompts are refused with a math-only response. | Passed |
+| 2026-05-21 | Developer | Model unavailable case | Checked behavior when the model configuration is missing or unavailable. | Passed |
