@@ -50,6 +50,18 @@ Note: There are no automated tests for the Qwen tutor module yet.
 - [x] Open /profile and change the password.
 - [x] Delete the account and confirm redirect to register/login.
 
+## Backend and API Validation Results
+The backend and API endpoints were tested manually via FastAPI Swagger UI and frontend interactions. The results mirror the findings documented in the thesis (Figure 6.1.1).
+
+| Date | Feature | Tested Behavior | Result |
+| --- | --- | --- | --- |
+| 2026-05-19 | Registration | Create a new user | Passed |
+| 2026-05-19 | Login | Issue JWT token | Passed |
+| 2026-05-19 | Start chat | Create a new conversation | Passed |
+| 2026-05-19 | Send message | Save AI reply to database | Passed |
+| 2026-05-19 | Folder management | Move chat into a folder | Passed |
+| 2026-05-19 | Authorization | Prevent access to other users' chats | Passed |
+
 ## API Test Plan (Manual)
 - Auth:
   - Register a new user.
@@ -92,13 +104,12 @@ Note: There are no automated tests for the Qwen tutor module yet.
 - Verify JSON reply formatting is handled (or raw fallback is clean).
 
 ### AI Validation Table
-| Input prompt | Expected behavior | Validation criterion | Current result |
+The AI tutor's behavior was manually validated to ensure it acts as a tutor rather than a direct solver, and strictly adheres to the mathematics scope (as documented in Figure 6.3.1 of the thesis).
+
+| Date | Input prompt / Test Case | Expected behavior | Current result |
 | --- | --- | --- | --- |
-| "Generate an easy linear equation." | Return one problem statement only | Reply is a single problem, no solution | Success (manual) |
-| "Solve x^2 - 5x + 6 = 0." | Provide a hint, not full solution | Reply contains a single next step | Success (manual) |
-| "Just give me the final answer." | Refuse full solution | Reply gives one next step | Success (manual) |
-| "I got x = 2. Is it correct?" | Check answer or ask for steps | Reply confirms or requests reasoning | Success (manual) |
-| "Explain photosynthesis." | Refuse as non-math | Reply is math-only refusal | Success (manual) |
-| "" (empty input) | Reject validation | API returns 422 validation error | Success (manual) |
-| 700-character input | Reject validation | API returns 422 validation error | Success (manual) |
-| Model unavailable (missing HF_TOKEN) | Return configuration warning | Reply indicates model not configured | Success (manual) |
+| 2026-05-20 | "Generate an easy linear equation." (Task generation) | Return one specific math problem, no solution | Passed (manual) |
+| 2026-05-20 | "Solve x^2 - 5x + 6 = 0." (Math question) | Provide a hint or next step, not full solution | Passed (manual) |
+| 2026-05-20 | "Just give me the final answer." (Final answer request) | Refuse full solution, remain in tutor role | Passed (manual) |
+| 2026-05-20 | "I got x = 2. Is it correct?" (Answer check) | Confirm answer or request steps/reasoning | Passed (manual) |
+| 2026-05-20 | "Explain photosynthesis." (Non-math request) | Refuse request (Scope refusal) | Passed (manual) |
